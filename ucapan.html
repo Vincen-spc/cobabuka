@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivasi Tugas Akhir</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container1">
+        <div class="anjing-container">
+            <img src="gambar2.jpg" alt="Gambar 2" class="image">
+            <img src="gambar1.jpg" alt="Gambar 1" class="image">
+        </div>
+
+        <div class="content">
+            <div class="title">
+                <h1><span class="emote">😇</span>amsal 23:18<span class="emote">😇 </span></h1>
+            </div>
+
+            <div class="quote-box">
+                <div id="quoteDisplay">Karena masa depan sungguh ada, dan harapanmu tidak akan hilang.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elemen audio untuk memutar musik latar -->
+    <audio id="background-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById('background-music');
+
+            // Jika ada data di localStorage, lanjutkan dari posisi terakhir
+            if (localStorage.getItem('musicTime')) {
+                audio.currentTime = parseFloat(localStorage.getItem('musicTime')); // Pastikan nilai diambil sebagai angka
+            }
+
+            // Coba putar musik saat halaman di-load
+            audio.play().catch(function () {
+                document.body.addEventListener('click', function () {
+                    audio.play();
+                }, { once: true });
+            });
+
+            // Simpan posisi audio di localStorage setiap kali waktu audio diperbarui
+            audio.addEventListener('timeupdate', function () {
+                localStorage.setItem('musicTime', audio.currentTime);
+            });
+        });
+    </script>
+</body>
+
+</html>

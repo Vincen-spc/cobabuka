@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivasi Tugas Akhir</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Image Container to ensure the image is centered -->
+        <div class="image-container">
+            <img src="gambar3.jpg" alt="Gambar 2" class="image">
+        </div>
+
+        <div id="card" class="card-content">
+            <div class="title">
+                <h1><span class="emote">💪</span>Motivasi Tugas Akhir<span class="emote">💪</span></h1>
+            </div>
+            <div class="quote-box">
+                <p>Semangat tugas akhirnya, kamu pasti bisa!</p>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button id="next-button">✨🎄 SELANJUTNYAA ✨🎄</button>
+        </div>
+    </div>
+
+    <audio id="background-music" preload="auto" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById('background-music');
+            const savedTime = localStorage.getItem('audioTime');
+
+            // Jika ada waktu yang tersimpan, setel audio ke posisi tersebut
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
+            // Mulai putar musik
+            audio.play().catch(function () {
+                // Jika autoplay diblokir, tunggu klik pengguna untuk memulai
+                document.body.addEventListener('click', function () {
+                    audio.play();
+                }, { once: true });
+            });
+
+            // Saat pindah halaman, simpan posisi audio
+            document.getElementById('next-button').addEventListener('click', function () {
+                localStorage.setItem('audioTime', audio.currentTime);
+                window.location.href = "ucapan.html"; // Pindah ke halaman berikutnya
+            });
+
+            // Simpan waktu audio setiap kali posisi berubah (timeupdate event)
+            audio.addEventListener('timeupdate', function () {
+                localStorage.setItem('audioTime', audio.currentTime);
+            });
+        });
+    </script>
+</body>
+</html>
